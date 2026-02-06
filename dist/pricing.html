@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing — Ahern Maritime | Boat Bottom Cleaning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --navy: #0b1d2e;
+            --navy-mid: #122a40;
+            --navy-light: #1a3a56;
+            --teal: #2ec4b6;
+            --teal-glow: #3fe8d8;
+            --sand: #f0e6d3;
+            --white: #ffffff;
+            --slate: #8a9bb0;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--navy);
+            color: var(--white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 3rem;
+            background: rgba(11, 29, 46, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(46, 196, 182, 0.1);
+        }
+        .nav-brand {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.3rem;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--slate);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--teal); }
+        .nav-cta {
+            background: var(--teal);
+            color: var(--navy) !important;
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600 !important;
+        }
+        .nav-cta:hover {
+            background: var(--teal-glow) !important;
+            color: var(--navy) !important;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            padding: 10rem 2rem 5rem;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(46,196,182,0.08) 0%, transparent 60%),
+                        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(46,196,182,0.04) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--teal);
+            border: 1px solid rgba(46,196,182,0.3);
+            padding: 0.4rem 1.2rem;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 0.6s ease-out;
+        }
+        .hero h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            animation: fadeInDown 0.7s ease-out 0.1s both;
+        }
+        .hero h1 em {
+            font-style: italic;
+            color: var(--teal);
+        }
+        .hero > p {
+            max-width: 580px;
+            margin: 0 auto;
+            color: var(--slate);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            animation: fadeInDown 0.7s ease-out 0.2s both;
+        }
+
+        /* ── RATE TABLE SECTION ── */
+        .rates-section {
+            padding: 2rem 2rem 6rem;
+            max-width: 880px;
+            margin: 0 auto;
+        }
+        .rates-table-wrap {
+            background: var(--navy-mid);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 18px;
+            overflow: hidden;
+            animation: fadeInUp 0.7s ease-out 0.1s both;
+        }
+        .rates-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .rates-table thead th {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--slate);
+            padding: 1.4rem 2rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .rates-table thead th:last-child { text-align: right; }
+        .rates-table thead th:nth-child(2) { text-align: center; }
+        .rates-table tbody tr {
+            transition: background 0.25s;
+            cursor: default;
+        }
+        .rates-table tbody tr:hover { background: rgba(46,196,182,0.04); }
+        .rates-table tbody tr:not(:last-child) td {
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .rates-table td {
+            padding: 1.5rem 2rem;
+            vertical-align: top;
+        }
+        .rate-plan-name {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+        }
+        .rate-plan-desc {
+            color: var(--slate);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            max-width: 320px;
+        }
+        .rate-price-cell {
+            text-align: right;
+            white-space: nowrap;
+        }
+        .rate-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1;
+        }
+        .rate-price .dollar-sign {
+            font-size: 1rem;
+            color: var(--teal);
+            vertical-align: super;
+            margin-right: 1px;
+        }
+        .rate-unit {
+            font-size: 0.8rem;
+            color: var(--slate);
+            margin-top: 0.2rem;
+        }
+
+        /* ── NOTE ── */
+        .rates-note {
+            text-align: center;
+            color: var(--slate);
+            font-size: 0.88rem;
+            line-height: 1.6;
+            margin-top: 2rem;
+            animation: fadeInUp 0.7s ease-out 0.3s both;
+        }
+        .rates-note strong {
+            color: rgba(255,255,255,0.7);
+            font-weight: 600;
+        }
+
+        /* ── PRICE CALCULATOR ── */
+        .calc-section {
+            padding: 4rem 2rem 5rem;
+            background: var(--navy-mid);
+            position: relative;
+        }
+        .calc-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(46,196,182,0.2), transparent);
+        }
+        .calc-inner {
+            max-width: 540px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .calc-inner h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        .calc-inner > p {
+            color: var(--slate);
+            font-size: 0.95rem;
+            margin-bottom: 2.5rem;
+        }
+        .calc-card {
+            background: var(--navy);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+        }
+        .calc-field {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        .calc-field label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--slate);
+            margin-bottom: 0.5rem;
+        }
+        .calc-field input,
+        .calc-field select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--navy-mid);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+            -webkit-appearance: none;
+        }
+        .calc-field input:focus,
+        .calc-field select:focus { border-color: var(--teal); }
+        .calc-field select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a9bb0' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+        .calc-field select option {
+            background: var(--navy-mid);
+            color: var(--white);
+        }
+        .calc-result {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            text-align: center;
+            min-height: 80px;
+            transition: opacity 0.3s;
+        }
+        .calc-result-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--slate);
+            margin-bottom: 0.5rem;
+        }
+        .calc-result-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1;
+        }
+        .calc-result-price .dollar-sign {
+            font-size: 1.5rem;
+            color: var(--teal);
+            vertical-align: super;
+            margin-right: 2px;
+        }
+        .calc-result-note {
+            color: var(--slate);
+            font-size: 0.85rem;
+            margin-top: 0.4rem;
+        }
+
+        /* ── CTA ── */
+        .cta-section {
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(46,196,182,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .cta-section h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+        .cta-section p {
+            color: var(--slate);
+            font-size: 1.05rem;
+            max-width: 480px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .cta-btn-primary {
+            background: var(--teal);
+            color: var(--navy);
+            padding: 0.9rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .cta-btn-primary:hover {
+            background: var(--teal-glow);
+            box-shadow: 0 8px 30px rgba(46,196,182,0.25);
+        }
+        .cta-btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 1.5px solid rgba(255,255,255,0.15);
+            padding: 0.9rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .cta-btn-secondary:hover {
+            border-color: var(--teal);
+            color: var(--teal);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 2.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        footer .foot-brand {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.1rem;
+        }
+        footer .foot-copy {
+            color: var(--slate);
+            font-size: 0.8rem;
+        }
+        footer .foot-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+        footer .foot-links a {
+            color: var(--slate);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+        footer .foot-links a:hover { color: var(--teal); }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 700px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .hero { padding: 8rem 1.5rem 3rem; }
+            .rates-section { padding: 1.5rem 1rem 4rem; }
+            .rates-table thead th { padding: 1rem 1rem 0.75rem; font-size: 0.65rem; }
+            .rates-table td { padding: 1.2rem 1rem; }
+            .rate-plan-name { font-size: 1.05rem; }
+            .rate-plan-desc { font-size: 0.78rem; }
+            .rate-price { font-size: 1.6rem; }
+            .calc-section { padding: 3rem 1.25rem 4rem; }
+            footer {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="index.html" class="nav-brand">Ahern Maritime</a>
+        <ul class="nav-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="index.html#contact" class="nav-cta">Get a Quote</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-badge">⚓ Per-Foot Rates</div>
+        <h1>Simple, <em>Honest</em> Pricing</h1>
+        <p>Rate is per foot of vessel length. Includes hull cleaning, running gear, and inspection of sacrificial anodes (zincs). The more often we dive, the less you pay.</p>
+    </section>
+
+    <!-- RATE TABLE -->
+    <section class="rates-section" id="pricing">
+        <div class="rates-table-wrap">
+            <table class="rates-table">
+                <thead>
+                    <tr>
+                        <th>Plan</th>
+                        <th>Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="rate-plan-name">Single Cleaning</div>
+                            <div class="rate-plan-desc">One-time service, scheduled on demand</div>
+                        </td>
+                        <td class="rate-price-cell">
+                            <div class="rate-price"><span class="dollar-sign">$</span>9</div>
+                            <div class="rate-unit">per foot</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="rate-plan-name">Monthly</div>
+                            <div class="rate-plan-desc">Diver returns every 4th week through end of September</div>
+                        </td>
+                        <td class="rate-price-cell">
+                            <div class="rate-price"><span class="dollar-sign">$</span>5.25</div>
+                            <div class="rate-unit">per foot</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="rate-plan-name">Every 3 Weeks</div>
+                            <div class="rate-plan-desc">Diver returns every 3 weeks through Columbus Day Weekend</div>
+                        </td>
+                        <td class="rate-price-cell">
+                            <div class="rate-price"><span class="dollar-sign">$</span>4.75</div>
+                            <div class="rate-unit">per foot</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="rate-plan-name">Every 2 Weeks</div>
+                            <div class="rate-plan-desc">Diver returns every 2 weeks through Columbus Day Weekend</div>
+                        </td>
+                        <td class="rate-price-cell">
+                            <div class="rate-price"><span class="dollar-sign">$</span>4.25</div>
+                            <div class="rate-unit">per foot</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="rate-plan-name">Weekly</div>
+                            <div class="rate-plan-desc">Diver returns weekly through Columbus Day Weekend</div>
+                        </td>
+                        <td class="rate-price-cell">
+                            <div class="rate-price"><span class="dollar-sign">$</span>4</div>
+                            <div class="rate-unit">per foot</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="rates-note">
+            All plans include <strong>hull cleaning</strong>, <strong>running gear service</strong>, and <strong>zinc inspection</strong> after every dive. Seasonal plans run through the dates indicated above.
+        </p>
+    </section>
+
+    <!-- PRICE CALCULATOR -->
+    <section class="calc-section">
+        <div class="calc-inner">
+            <h2>Estimate Your Cost</h2>
+            <p>Enter your vessel length and choose a plan to see your per-cleaning price.</p>
+            <div class="calc-card">
+                <div class="calc-field">
+                    <label>Vessel Length (feet)</label>
+                    <input type="number" id="boatLength" min="10" max="200" placeholder="e.g. 32" oninput="calculate()">
+                </div>
+                <div class="calc-field">
+                    <label>Cleaning Plan</label>
+                    <select id="planSelect" onchange="calculate()">
+                        <option value="9">Single Cleaning — $9/ft</option>
+                        <option value="5.25">Monthly — $5.25/ft</option>
+                        <option value="4.75" selected>Every 3 Weeks — $4.75/ft</option>
+                        <option value="4.25">Every 2 Weeks — $4.25/ft</option>
+                        <option value="4">Weekly — $4/ft</option>
+                    </select>
+                </div>
+                <div class="calc-result" id="calcResult">
+                    <div class="calc-result-label">Your Price Per Cleaning</div>
+                    <div class="calc-result-price" id="calcPrice">—</div>
+                    <div class="calc-result-note" id="calcNote"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2>Ready for a <em style="font-style:italic;color:var(--teal)">Cleaner Hull</em>?</h2>
+        <p>Get a free quote tailored to your vessel. We'll get back to you within 24 hours.</p>
+        <div class="cta-buttons">
+            <a href="index.html#contact" class="cta-btn-primary">Request a Quote</a>
+            <a href="tel:+16318965010" class="cta-btn-secondary">📞 (631) 896-5010</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <span class="foot-brand">Ahern Maritime</span>
+        <ul class="foot-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <span class="foot-copy">© 2025 Ahern Maritime. All rights reserved. Cold Spring Harbor, NY.</span>
+    </footer>
+
+    <script>
+        function calculate() {
+            const len = parseFloat(document.getElementById('boatLength').value);
+            const rate = parseFloat(document.getElementById('planSelect').value);
+            const priceEl = document.getElementById('calcPrice');
+            const noteEl = document.getElementById('calcNote');
+
+            if (!len || len <= 0) {
+                priceEl.innerHTML = '—';
+                noteEl.textContent = '';
+                return;
+            }
+
+            const total = len * rate;
+            priceEl.innerHTML = `<span class="dollar-sign">$</span>${total.toFixed(2)}`;
+
+            const planName = document.getElementById('planSelect').options[document.getElementById('planSelect').selectedIndex].text.split('—')[0].trim();
+            noteEl.textContent = `${len} ft × $${rate}/ft · ${planName}`;
+        }
+
+        // Initialize calculator
+        calculate();
+    </script>
+
+</body>
+</html>
