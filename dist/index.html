@@ -856,25 +856,27 @@
                 </div>
             </div>
 
-            <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+            <form class="contact-form reveal" name="quote-request" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="quote-request">
+                <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" placeholder="Your name" required>
+                        <input type="text" name="name" placeholder="Your name" required>
                     </div>
                     <div class="form-group">
                         <label>Phone</label>
-                        <input type="tel" placeholder="(555) 000-0000">
+                        <input type="tel" name="phone" placeholder="(555) 000-0000">
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" placeholder="your@email.com" required>
+                    <input type="email" name="email" placeholder="your@email.com" required>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Boat Length</label>
-                        <select>
+                        <select name="boat-length">
                             <option value="">Select size</option>
                             <option>8 ft</option>
                             <option>9 ft</option>
@@ -974,7 +976,7 @@
                     </div>
                     <div class="form-group">
                         <label>Location</label>
-                        <select>
+                        <select name="location">
                             <option value="">Select area</option>
                             <option>Cold Spring Harbor</option>
                             <option>Oyster Bay</option>
@@ -984,7 +986,7 @@
                 </div>
                 <div class="form-group">
                     <label>Message</label>
-                    <textarea placeholder="Tell us about your boat and what you need..."></textarea>
+                    <textarea name="message" placeholder="Tell us about your boat and what you need..."></textarea>
                 </div>
                 <button type="submit" class="btn-primary">Send Request</button>
             </form>
@@ -1035,12 +1037,7 @@
 
         reveals.forEach(el => observer.observe(el));
 
-        // Form handler placeholder
-        function handleSubmit(e) {
-            e.preventDefault();
-            alert('Thank you! We\'ll be in touch within 24 hours.');
-            e.target.reset();
-        }
+        // Form handled by Netlify Forms
     </script>
 
 </body>
