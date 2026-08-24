@@ -516,6 +516,74 @@
             font-weight: 300;
         }
 
+
+        /* ── WATER TEMP ── */
+        .conditions {
+            background: linear-gradient(165deg, var(--navy), var(--deep));
+            color: var(--white);
+        }
+        .conditions-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .conditions .section-label { color: var(--foam); }
+        .conditions .section-title { color: var(--white); }
+        .conditions .section-subtitle {
+            color: rgba(168,216,232,0.5);
+            margin: 0 auto 3rem;
+        }
+        .temp-display {
+            display: inline-block;
+            padding: 2.5rem 3.5rem;
+            border: 1px solid rgba(168,216,232,0.15);
+            border-radius: 6px;
+            background: rgba(255,255,255,0.03);
+        }
+        .temp-value {
+            font-family: 'DM Serif Display', serif;
+            font-size: 4.5rem;
+            line-height: 1;
+            color: var(--foam);
+        }
+        .temp-value span {
+            font-size: 2rem;
+            vertical-align: super;
+        }
+        .temp-station {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.55);
+            font-weight: 300;
+        }
+        .temp-season {
+            margin-top: 1.5rem;
+            display: inline-block;
+            padding: 0.4rem 1.1rem;
+            border-radius: 100px;
+            border: 1px solid rgba(168,216,232,0.25);
+            font-size: 0.8rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--foam);
+        }
+        .temp-note {
+            margin-top: 2rem;
+            font-size: 0.88rem;
+            line-height: 1.7;
+            font-weight: 300;
+            color: rgba(255,255,255,0.55);
+            max-width: 560px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .temp-source {
+            margin-top: 1.2rem;
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.35);
+        }
+        .temp-source a { color: rgba(168,216,232,0.6); }
+
         /* ── SERVICE AREA ── */
         .area { background: var(--salt); }
         .area-inner {
@@ -831,6 +899,26 @@
         </div>
     </section>
 
+    <!-- WATER TEMP -->
+    <section class="conditions" id="conditions">
+        <div class="conditions-inner reveal">
+            <div class="section-label">Harbor Conditions</div>
+            <h2 class="section-title">Current Water Temperature</h2>
+            <p class="section-subtitle">Live reading from Long Island Sound. Water temperature drives how fast marine growth builds on your hull.</p>
+
+            <div class="temp-display">
+                <div class="temp-value" id="tempValue">—<span>°F</span></div>
+                <div class="temp-station" id="tempStation">Long Island Sound &middot; Kings Point, NY</div>
+            </div>
+            <div>
+                <div class="temp-season" id="tempSeason" style="display:none;"></div>
+            </div>
+
+            <p class="temp-note">Warm water means faster fouling. Through the summer months, barnacles and soft growth can take hold in a matter of weeks — regular cleanings keep your hull smooth all season.</p>
+            <p class="temp-source">Source: <a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=8516945" target="_blank" rel="noopener">NOAA Station 8516945</a>, updated <span id="tempTime">&mdash;</span></p>
+        </div>
+    </section>
+
     <!-- SERVICE AREA -->
     <section class="area" id="area">
         <div class="area-inner reveal">
@@ -909,6 +997,36 @@
         }, { threshold: 0.15 });
 
         reveals.forEach(el => observer.observe(el));
+
+        // Live water temperature — NOAA CO-OPS, Kings Point NY (station 8516945)
+        (async function loadWaterTemp() {
+            try {
+                const url = 'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter'
+                    + '?date=latest&station=8516945&product=water_temperature'
+                    + '&units=english&time_zone=lst_ldt&format=json&application=ahernmaritime.com';
+                const res = await fetch(url);
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const data = await res.json();
+                const reading = data && data.data && data.data[0];
+                if (!reading || !reading.v) throw new Error('No reading');
+
+                const temp = parseFloat(reading.v);
+                document.getElementById('tempValue').innerHTML = temp.toFixed(1) + '<span>&deg;F</span>';
+                document.getElementById('tempTime').textContent = reading.t;
+
+                let season = '';
+                if (temp < 45)      season = 'Off-Season &middot; Growth Dormant';
+                else if (temp < 55) season = 'Early Season &middot; Growth Slow';
+                else if (temp < 65) season = 'Growth Season &middot; Fouling Active';
+                else                season = 'Peak Season &middot; Fouling Fast';
+                const badge = document.getElementById('tempSeason');
+                badge.innerHTML = season;
+                badge.style.display = 'inline-block';
+            } catch (err) {
+                // Leave the placeholder dash; hide the timestamp line gracefully
+                document.getElementById('tempTime').textContent = 'see NOAA station page';
+            }
+        })();
 
         // Form handled by Netlify Forms
     </script>
