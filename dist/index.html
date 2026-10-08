@@ -1041,11 +1041,18 @@
                 document.getElementById('tempValue').innerHTML = temp.toFixed(1) + '<span>&deg;F</span>';
                 document.getElementById('tempTime').textContent = reading.t;
 
+                // Month-aware labels: Oct–Dec the water is cooling, so say "Late Season"
+                // instead of "Early"/"Peak". Month taken from the NOAA reading (station local time).
+                const month = parseInt((reading.t || '').slice(5, 7), 10) || (new Date().getMonth() + 1);
+                const cooling = month >= 10;
                 let season = '';
-                if (temp < 45)      season = 'Off-Season &middot; Growth Dormant';
-                else if (temp < 55) season = 'Early Season &middot; Growth Slow';
-                else if (temp < 65) season = 'Growth Season &middot; Fouling Active';
-                else                season = 'Peak Season &middot; Fouling Fast';
+                if (temp < 45)           season = 'Off-Season &middot; Growth Dormant';
+                else if (cooling)        season = temp < 55
+                                             ? 'Late Season &middot; Growth Slowing'
+                                             : 'Late Season &middot; Fouling Active';
+                else if (temp < 55)      season = 'Early Season &middot; Growth Slow';
+                else if (temp < 65)      season = 'Growth Season &middot; Fouling Active';
+                else                     season = 'Peak Season &middot; Fouling Fast';
                 const badge = document.getElementById('tempSeason');
                 badge.innerHTML = season;
                 badge.style.display = 'inline-block';
