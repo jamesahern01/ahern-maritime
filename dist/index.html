@@ -517,6 +517,66 @@
         }
 
 
+
+        /* ── FIELD FOOTAGE ── */
+        .footage { background: var(--white); }
+        .footage-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 5fr 7fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .footage-text { min-width: 0; }
+        .footage-text p {
+            color: #4A5D6E;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+            font-weight: 300;
+            font-size: 0.95rem;
+        }
+        .footage-video {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--navy);
+            aspect-ratio: 16/9;
+            max-width: 100%;
+            box-shadow: 0 24px 60px rgba(11,29,46,0.18);
+        }
+        .footage-video video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: zoom-in;
+        }
+        .footage-video video:fullscreen { object-fit: contain; cursor: default; }
+        .sound-toggle {
+            position: absolute;
+            right: 1rem;
+            bottom: 1rem;
+            background: rgba(11,29,46,0.8);
+            color: var(--white);
+            border: 1px solid rgba(168,216,232,0.3);
+            border-radius: 100px;
+            padding: 0.5rem 1rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            backdrop-filter: blur(6px);
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .sound-toggle:hover { background: var(--deep); border-color: var(--foam); }
+        .sound-toggle:focus-visible { outline: 2px solid var(--foam); outline-offset: 2px; }
+        @media (max-width: 900px) {
+            .footage-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .footage-video { order: -1; }
+        }
+
         /* ── WATER TEMP ── */
         .conditions {
             background: linear-gradient(165deg, var(--navy), var(--deep));
@@ -711,6 +771,27 @@
         }
         .info-item a:hover { text-decoration: underline; }
 
+
+        /* contact with photo */
+        .contact-split {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .contact-photo { aspect-ratio: 4/3; max-width: 100%; }
+        .contact-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; display: block; }
+        .contact-simple { min-width: 0; }
+        .contact-simple .section-subtitle { margin: 0 0 2.5rem !important; }
+        .contact-methods { display: flex; gap: 1.25rem 2.5rem; flex-wrap: wrap; }
+        .contact-methods .info-item { margin-bottom: 0; }
+        @media (max-width: 900px) {
+            .contact-split { grid-template-columns: 1fr; gap: 2.5rem; }
+            .contact-photo { max-height: 300px; }
+        }
+
         /* ── FOOTER ── */
         footer {
             background: var(--navy);
@@ -810,6 +891,7 @@
       "url": "https://ahernmaritime.com/",
       "telephone": "+1-631-896-5010",
       "email": "james@ahernmaritime.com",
+      "sameAs": ["https://www.instagram.com/ahernmaritime/"],
       "address": {"@type": "PostalAddress", "addressLocality": "Huntington", "addressRegion": "NY", "addressCountry": "US"},
       "areaServed": [
         {"@type": "Place", "name": "Huntington, NY"},
@@ -831,7 +913,6 @@
     <nav id="nav">
         <a href="#" class="nav-logo">Ahern <span>Maritime</span></a>
         <ul class="nav-links" id="navLinks">
-            <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="pricing.html">Pricing</a></li>
             <li><a href="#area">Area</a></li>
@@ -862,41 +943,12 @@
         </div>
 
         <div class="hero-content">
-            <div class="hero-badge">North Shore, NY</div>
+            <div class="hero-badge">Now Booking the 2027 Season</div>
             <h1>A Clean Hull <em>Is a<br>Fast Hull</em></h1>
             <p>Professional hull cleaning diver for Oyster Bay, Cold Spring Harbor, Huntington, Centerport and Northport. We keep your vessel performing at its best — every dive, every time.</p>
             <div class="hero-buttons">
                 <a href="#contact" class="btn-primary">Contact Us</a>
                 <a href="#services" class="btn-outline">Our Services</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="about" id="about">
-        <div class="about-grid">
-            <div class="about-visual">
-                <img src="assets/images/diver-cleaning.jpg" alt="Ahern Maritime diver next to branded Boston Whaler work boat">
-            </div>
-            <div class="about-text reveal">
-                <div class="section-label">About Ahern Maritime</div>
-                <h2 class="section-title">Dedicated to What's Below the Waterline</h2>
-                <p>Ahern Maritime is a specialist boat bottom cleaning service based on Long Island's North Shore. We focus exclusively on underwater hull maintenance — because a clean bottom means better performance, lower fuel costs, and a longer life for your vessel.</p>
-                <p>Marine growth like barnacles, algae, and slime can increase drag by up to 40%, costing you speed and money every time you head out. An experienced diver keeps your hull in peak condition so you can focus on what matters — being on the water.</p>
-                <div class="stat-row">
-                    <div class="stat">
-                        <h4>Increased</h4>
-                        <p>Fuel Savings</p>
-                    </div>
-                    <div class="stat">
-                        <h4>Increased</h4>
-                        <p>Speed</p>
-                    </div>
-                    <div class="stat">
-                        <h4>100%</h4>
-                        <p>Satisfaction</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -918,6 +970,22 @@
                 <div class="service-icon">🔍</div>
                 <h3>Hull Inspection</h3>
                 <p>Detailed visual inspection of your hull, zincs, and underwater hardware. We'll report any issues before they become costly problems.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FIELD FOOTAGE -->
+    <section class="footage" id="footage">
+        <div class="footage-grid">
+            <div class="footage-text reveal">
+                <div class="section-label">From the Water</div>
+                <h2 class="section-title">This Is What Waiting Too Long Looks Like</h2>
+                <p>Footage from one of our dives in East Hampton. Every blade of this prop is buried in growth, and the keel and running gear aren&rsquo;t far behind.</p>
+                <p>Marine growth like barnacles, algae, and slime can increase drag by up to 40%, costing you speed and money every time you head out. Regular cleanings keep your hull from ever getting this far.</p>
+            </div>
+            <div class="footage-video">
+                <video id="hullVideo" src="assets/video/hull-before.mp4" poster="assets/video/hull-before-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Underwater footage of a heavily fouled boat propeller and hull bottom"></video>
+                <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false">&#128264; Tap for sound</button>
             </div>
         </div>
     </section>
@@ -961,12 +1029,16 @@
 
     <!-- CONTACT -->
     <section class="contact" id="contact">
-        <div class="contact-simple reveal" style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <div class="contact-split">
+            <div class="contact-photo">
+                <img src="assets/images/diver-cleaning.jpg" alt="Ahern Maritime diver next to branded Boston Whaler work boat">
+            </div>
+            <div class="contact-simple reveal">
             <div class="section-label">Get in Touch</div>
             <h2 class="section-title">Ready for a Cleaner Hull?</h2>
-            <p class="section-subtitle" style="margin: 0 auto 3rem;">Give us a call or send an email — we'll get back to you within 24 hours.</p>
+            <p class="section-subtitle">Get on the schedule for the 2027 season, starting May 15. Call or email and we'll get back to you within 24 hours.</p>
 
-            <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;">
+            <div class="contact-methods">
                 <div class="info-item" style="text-align: left;">
                     <div class="info-icon">📞</div>
                     <div>
@@ -981,7 +1053,15 @@
                         <p><a href="mailto:james@ahernmaritime.com">james@ahernmaritime.com</a></p>
                     </div>
                 </div>
+                <div class="info-item" style="text-align: left;">
+                    <div class="info-icon">📷</div>
+                    <div>
+                        <h4>Instagram</h4>
+                        <p><a href="https://www.instagram.com/ahernmaritime/" target="_blank" rel="noopener">@ahernmaritime</a></p>
+                    </div>
+                </div>
             </div>
+        </div>
         </div>
     </section>
 
@@ -989,10 +1069,10 @@
     <footer>
         <div class="footer-logo">Ahern <span>Maritime</span></div>
         <ul class="footer-links">
-            <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="pricing.html">Pricing</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li><a href="https://www.instagram.com/ahernmaritime/" target="_blank" rel="noopener">Instagram</a></li>
         </ul>
         <p>&copy; 2026 Ahern Maritime. All rights reserved. Oyster Bay &middot; Cold Spring Harbor &middot; Huntington &middot; Centerport &middot; Northport, NY.</p>
     </footer>
@@ -1064,6 +1144,43 @@
                 // Leave the placeholder dash; hide the timestamp line gracefully
                 document.getElementById('tempTime').textContent = 'see NOAA station page';
             }
+        })();
+
+        // Footage sound toggle
+        (function () {
+            const v = document.getElementById('hullVideo');
+            const b = document.getElementById('soundToggle');
+            b.addEventListener('click', () => {
+                v.muted = !v.muted;
+                if (!v.muted) { v.currentTime = 0; v.play().catch(() => {}); }
+                b.innerHTML = v.muted ? '&#128264; Tap for sound' : '&#128266; Sound on';
+                b.setAttribute('aria-pressed', String(!v.muted));
+            });
+
+            // Click/tap the video to watch full screen with sound, from the start
+            const setSoundLabel = () => {
+                b.innerHTML = v.muted ? '&#128264; Tap for sound' : '&#128266; Sound on';
+                b.setAttribute('aria-pressed', String(!v.muted));
+            };
+            v.addEventListener('click', () => {
+                if (document.fullscreenElement || document.webkitFullscreenElement) return;
+                v.muted = false;
+                v.currentTime = 0;
+                v.play().catch(() => {});
+                setSoundLabel();
+                if (v.requestFullscreen) v.requestFullscreen().catch(() => {});
+                else if (v.webkitRequestFullscreen) v.webkitRequestFullscreen();
+                else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen(); // iPhone Safari
+            });
+            // Leaving full screen: back to the quiet loop on the page
+            const onExit = () => {
+                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                    v.muted = true; v.play().catch(() => {}); setSoundLabel();
+                }
+            };
+            document.addEventListener('fullscreenchange', onExit);
+            document.addEventListener('webkitfullscreenchange', onExit);
+            v.addEventListener('webkitendfullscreen', () => { v.muted = true; v.play().catch(() => {}); setSoundLabel(); });
         })();
 
         // Form handled by Netlify Forms
